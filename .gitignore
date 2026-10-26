@@ -1,0 +1,6 @@
+# ArcGIS Pro generated files
+.backups/
+.ipynb_checkpoints/
+/GpMessages/
+/ImportLog/
+/Index/
