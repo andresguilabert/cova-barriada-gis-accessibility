@@ -12,6 +12,8 @@ The animation illustrates how changing analysis parameters affects map outputs, 
 
 [**View the complete ArcGIS Pro workflow →**](https://github.com/andresguilabert/cova-barriada-gis-accessibility/blob/main/Cova_Barriada_Least_Cost_Analysis.ipynb)
 
+[**View the final map layout →**](https://github.com/andresguilabert/cova-barriada-gis-accessibility/blob/main/OUTPUT/LAYOUT.png)
+
 ## Project Overview
 
 Cova de la Barriada (Serra Gelada, Benidorm) yielded abundant remains of the land snail *Iberus alonensis*, interpreted as dietary diversification during the Early Upper Palaeolithic ([Fernández-López de Pablo et al., 2014](https://journals.plos.org/plosone/article?id=10.1371%2Fjournal.pone.0104898)). With sea level approximately **100 m below its present position**, the Mediterranean coastline lay considerably farther from the cave.
