@@ -6,7 +6,7 @@ This project develops a **parameterised and reproducible ArcGIS Pro Notebook wor
 
 The animated maps below illustrate how changing analysis parameters affects the resulting outputs.
 
-![Palaeocoast accessibility analysis](figures/palaeocoast_accessibility.gif)
+![Palaeocoast accessibility analysis](FIGURES/palaeocoast_accessibility.gif)
 
 ## Tools and Methods
 
