@@ -6,39 +6,43 @@ A **parameterised ArcGIS Pro Notebook workflow** combining terrain modelling, le
 
 The animation illustrates how changing analysis parameters affects map outputs, followed by a brief demonstration of parameter editing in the notebook.
 
-![Palaeocoast accessibility analysis](FIGURES/palaeocoast_accessibility.gif)
+[![Palaeocoast accessibility analysis](https://github.com/andresguilabert/cova-barriada-gis-accessibility/raw/main/FIGURES/palaeocoast_accessibility.gif)](https://github.com/andresguilabert/cova-barriada-gis-accessibility/blob/main/FIGURES/palaeocoast_accessibility.gif)
 
 ## Notebook
 
-[**View the complete ArcGIS Pro workflow →**](Cova_Barriada_Least_Cost_Analysis.ipynb)
+[**View the complete ArcGIS Pro workflow →**](https://github.com/andresguilabert/cova-barriada-gis-accessibility/blob/main/Cova_Barriada_Least_Cost_Analysis.ipynb)
 
 ## Project Overview
 
-### Case Study: Cova de la Barriada (*Barriada Cave*)
+Cova de la Barriada (Serra Gelada, Benidorm) yielded abundant remains of the land snail *Iberus alonensis*, interpreted as dietary diversification during the Early Upper Palaeolithic ([Fernández-López de Pablo et al., 2014](https://journals.plos.org/plosone/article?id=10.1371%2Fjournal.pone.0104898)). With sea level approximately **100 m below its present position**, the Mediterranean coastline lay considerably farther from the cave.
 
-Archaeological evidence from Cova de la Barriada includes abundant remains of the land snail *Iberus alonensis*, interpreted as evidence of dietary diversification during the Early Upper Palaeolithic ([Fernández-López de Pablo et al., 2014](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0104898)). With sea level approximately **100 m below its present position**, the Mediterranean coastline lay considerably farther from the cave than it does today.
+Using official topographic and bathymetric data, the workflow models travel from the cave to a palaeocoast approximated by the −100 m bathymetric contour. Least-cost analysis compares two coastal sectors, identifying the more accessible one, its **Palaeocoast Endpoint** and the corresponding route from the cave.
 
-Using official topographic and bathymetric data, the project models potential access from the cave to a predefined palaeocoast approximated by the −100 m bathymetric contour. Least-cost analysis compares travel costs to two coastal sectors, identifying the more accessible sector, its **Palaeocoast Endpoint** and the corresponding route from the cave.
-
-### Technical Design: Automation and Reproducibility
-
-The workflow is implemented in an **ArcGIS Pro Notebook using ArcPy**, with centralised parameters, project-relative paths and a dedicated staging geodatabase to support repeatable processing and structured data management.
-
-Three key settings can be adjusted: DTM cell size, slope-angle limits for Tobler-based hiking-time modelling, and travel-time thresholds for isochrone generation. The notebook also automates the generation of intermediate figures and the final map layout, keeping cartographic outputs consistent with the analytical results.
-
-The modular, parameterised design provides a foundation for extending the analysis to alternative terrain or bathymetric inputs and additional environmental cost factors.
-
+Three parameters can be adjusted (DTM cell size, slope-angle limits of the Tobler hiking-time model and travel-time thresholds for isochrones), and each run regenerates the analysis, intermediate figures and final map layout.
 
 ## Technical Highlights
 
-- **GIS automation:** ArcPy-based processing in ArcGIS Pro.
-- **Terrain analysis:** DTM generation, distance accumulation and optimal path modelling.
-- **Travel-time modelling:** Tobler's hiking function, isochrones and coastal accessibility zonation.
-- **Reproducible mapping:** Parameter-driven outputs and automated map layout generation.
-- **Structured data management:** Project-relative paths and a dedicated staging geodatabase.
+- **Parameter-driven pipeline:** three user-defined settings, validated before execution; a single run regenerates datasets, figures and layout.
+- **Terrain and least-cost modelling:** DTM interpolation from contours with cliff and coastal constraints (`Topo To Raster`), direction-dependent hiking-time surfaces (`Distance Accumulation`) and bidirectional least-time routes (`Optimal Path As Line`).
+- **Results computed in code:** coastal endpoint, nearest sector, route lengths and travel times are derived from the outputs and reused in figures, layout and conclusions.
+- **Automated cartography:** intermediate figures built from reusable `.lyrx` styles; final layout generated from `.mapx` and `.pagx` templates, updated with `arcpy.mp` and exported at 600 dpi.
+- **Structured data management:** project-relative paths, a staging geodatabase for intermediate data, inputs standardised to ETRS89 / UTM 30N (EPSG:25830) and feature-count checks at each preparation step.
+
+## Repository Structure
+
+| Path | Content |
+| --- | --- |
+| `Cova_Barriada_Least_Cost_Analysis.ipynb` | ArcGIS Pro notebook with the complete workflow |
+| `cova-barriada-gis-accessibility.aprx` | ArcGIS Pro project; the notebook runs from here |
+| `DATA/RAW` | Topographic and bathymetric source data, clipped to the study area |
+| `DATA/REFERENCE` | Predefined project layers (cave location, extents, constraints, palaeocoast and sectors) |
+| `STYLES` | `.lyrx` symbology files used for the generated figures |
+| `TEMPLATES` | Map (`.mapx`) and layout (`.pagx`) templates for the automated layout |
+| `FIGURES` | Figures generated by the notebook and the README animation |
+| `OUTPUT` | Final datasets (shapefiles) and the exported layout |
+
+The staging geodatabase (`STAGING/STAGING.gdb`) is created on first execution.
 
 ## Tools
 
-ArcGIS Pro · ArcPy · Python · Spatial Analyst
-
-
+ArcGIS Pro · ArcPy · Python · Spatial Analyst · 3D Analyst
